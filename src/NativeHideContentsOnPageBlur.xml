@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="aiden.nativehidecontentsonpageblur.NativeHideContentsOnPageBlur" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Native"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Native Hide Contents On Page Blur</name>
+    <description>Native hide contents on page blur</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="pageName" type="string">
+                <caption>Page name</caption>
+                <description>The name of the page the widget is placed on</description>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
