@@ -7,6 +7,7 @@ export function NativeHideContentsOnPageBlur(props) {
         <NavigationEventReceiver
             contents={props.contents}
             logToConsole={!!props.logToConsole?.value}
+            widgetName={props.name}
         ></NavigationEventReceiver>
     );
 }

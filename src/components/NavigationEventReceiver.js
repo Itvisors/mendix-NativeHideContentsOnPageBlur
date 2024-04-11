@@ -5,10 +5,10 @@ import { View } from "react-native";
 export function NavigationEventReceiver(props) {
     const [renderContents, setRenderContents] = useState(true);
 
-    const onDidFocusHandler = useCallback(
+    const onWillFocusHandler = useCallback(
         payload => {
             if (props.logToConsole) {
-                console.info("NativeHideContentsOnPageBlur did focus, payload: " + JSON.stringify(payload));
+                console.info("NativeHideContentsOnPageBlur will focus, back to page: " + payload.state.params.pageName);
             }
             setRenderContents(true);
         },
@@ -18,7 +18,7 @@ export function NavigationEventReceiver(props) {
     const onWillBlurHandler = useCallback(
         payload => {
             if (props.logToConsole) {
-                console.info("NativeHideContentsOnPageBlur will blur, payload: " + JSON.stringify(payload));
+                console.info("NativeHideContentsOnPageBlur will blur, open page: " + payload.state.params.pageName);
             }
             setRenderContents(false);
         },
@@ -26,12 +26,12 @@ export function NavigationEventReceiver(props) {
     );
 
     if (props.logToConsole) {
-        console.info("NativeHideContentsOnPageBlur render contents: " + renderContents);
+        console.info(props.widgetName + ": render contents: " + renderContents);
     }
 
     return (
         <View style={{ flex: 1 }}>
-            <NavigationEvents onDidFocus={onDidFocusHandler} onWillBlur={onWillBlurHandler}></NavigationEvents>
+            <NavigationEvents onWillFocus={onWillFocusHandler} onWillBlur={onWillBlurHandler}></NavigationEvents>
             {renderContents ? props.contents : null}
         </View>
     );
