@@ -21,8 +21,8 @@ public class NativeAppContext implements com.mendix.systemwideinterfaces.core.IE
 	public enum MemberNames
 	{
 		ContextState("ContextState"),
-		ListPageVisible("ListPageVisible"),
-		TestDate("TestDate");
+		TestDate("TestDate"),
+		WriteToLog("WriteToLog");
 
 		private final java.lang.String metaName;
 
@@ -120,42 +120,6 @@ public class NativeAppContext implements com.mendix.systemwideinterfaces.core.IE
 	}
 
 	/**
-	 * @return value of ListPageVisible
-	 */
-	public final java.lang.Boolean getListPageVisible()
-	{
-		return getListPageVisible(getContext());
-	}
-
-	/**
-	 * @param context
-	 * @return value of ListPageVisible
-	 */
-	public final java.lang.Boolean getListPageVisible(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.ListPageVisible.toString());
-	}
-
-	/**
-	 * Set value of ListPageVisible
-	 * @param listpagevisible
-	 */
-	public final void setListPageVisible(java.lang.Boolean listpagevisible)
-	{
-		setListPageVisible(getContext(), listpagevisible);
-	}
-
-	/**
-	 * Set value of ListPageVisible
-	 * @param context
-	 * @param listpagevisible
-	 */
-	public final void setListPageVisible(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean listpagevisible)
-	{
-		getMendixObject().setValue(context, MemberNames.ListPageVisible.toString(), listpagevisible);
-	}
-
-	/**
 	 * @return value of TestDate
 	 */
 	public final java.util.Date getTestDate()
@@ -189,6 +153,42 @@ public class NativeAppContext implements com.mendix.systemwideinterfaces.core.IE
 	public final void setTestDate(com.mendix.systemwideinterfaces.core.IContext context, java.util.Date testdate)
 	{
 		getMendixObject().setValue(context, MemberNames.TestDate.toString(), testdate);
+	}
+
+	/**
+	 * @return value of WriteToLog
+	 */
+	public final java.lang.Boolean getWriteToLog()
+	{
+		return getWriteToLog(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of WriteToLog
+	 */
+	public final java.lang.Boolean getWriteToLog(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.WriteToLog.toString());
+	}
+
+	/**
+	 * Set value of WriteToLog
+	 * @param writetolog
+	 */
+	public final void setWriteToLog(java.lang.Boolean writetolog)
+	{
+		setWriteToLog(getContext(), writetolog);
+	}
+
+	/**
+	 * Set value of WriteToLog
+	 * @param context
+	 * @param writetolog
+	 */
+	public final void setWriteToLog(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean writetolog)
+	{
+		getMendixObject().setValue(context, MemberNames.WriteToLog.toString(), writetolog);
 	}
 
 	@java.lang.Override

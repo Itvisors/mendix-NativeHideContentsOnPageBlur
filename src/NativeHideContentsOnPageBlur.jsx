@@ -1,12 +1,11 @@
-import NavigationEventReceiver from "./components/NavigationEventReceiver";
+import { NavigationEventReceiver } from "./components/NavigationEventReceiver";
 import { createElement } from "react";
 // import { withNavigation } from "react-navigation";
 
 export function NativeHideContentsOnPageBlur(props) {
     return (
         <NavigationEventReceiver
-            pageIsVisibleAttr={props.pageIsVisibleAttr}
-            onVisibleStateChangedAction={props.onVisibleStateChangedAction}
+            contents={props.contents}
             logToConsole={!!props.logToConsole?.value}
         ></NavigationEventReceiver>
     );

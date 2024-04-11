@@ -1,55 +1,38 @@
-import { NavigationEvents, withNavigation } from "react-navigation";
-import { createElement, useCallback } from "react";
+import { createElement, useCallback, useState } from "react";
+import { NavigationEvents } from "react-navigation";
+import { View } from "react-native";
 
-function NavigationEventReceiver(props) {
-    const { pageIsVisibleAttr, onVisibleStateChangedAction } = props;
+export function NavigationEventReceiver(props) {
+    const [renderContents, setRenderContents] = useState(true);
 
     const onDidFocusHandler = useCallback(
         payload => {
-            console.info("did focus: " + JSON.stringify(payload));
-            if (pageIsVisibleAttr && pageIsVisibleAttr.status === "available") {
-                if (pageIsVisibleAttr.readOnly) {
-                    console.warn("NativeHideContentsOnPageBlur: Page is visible attribute is readonly");
-                } else {
-                    pageIsVisibleAttr.setValue(true);
-                }
+            if (props.logToConsole) {
+                console.info("NativeHideContentsOnPageBlur did focus, payload: " + JSON.stringify(payload));
             }
-            if (
-                onVisibleStateChangedAction &&
-                onVisibleStateChangedAction.canExecute &&
-                !onVisibleStateChangedAction.isExecuting
-            ) {
-                onVisibleStateChangedAction.execute();
-            }
+            setRenderContents(true);
         },
-        [onVisibleStateChangedAction, pageIsVisibleAttr]
+        [props.logToConsole]
     );
 
     const onWillBlurHandler = useCallback(
         payload => {
-            console.info("will blur: " + JSON.stringify(payload));
-            if (pageIsVisibleAttr && pageIsVisibleAttr.status === "available") {
-                if (pageIsVisibleAttr.readOnly) {
-                    console.warn("NativeHideContentsOnPageBlur: Page is visible attribute is readonly");
-                } else {
-                    pageIsVisibleAttr.setValue(false);
-                }
+            if (props.logToConsole) {
+                console.info("NativeHideContentsOnPageBlur will blur, payload: " + JSON.stringify(payload));
             }
-            if (
-                onVisibleStateChangedAction &&
-                onVisibleStateChangedAction.canExecute &&
-                !onVisibleStateChangedAction.isExecuting
-            ) {
-                onVisibleStateChangedAction.execute();
-            }
+            setRenderContents(false);
         },
-        [onVisibleStateChangedAction, pageIsVisibleAttr]
+        [props.logToConsole]
     );
 
-    console.info("NavigationEventReceiver.render");
-    console.info(JSON.stringify(props.navigation));
+    if (props.logToConsole) {
+        console.info("NativeHideContentsOnPageBlur render contents: " + renderContents);
+    }
 
-    return <NavigationEvents onDidFocus={onDidFocusHandler} onWillBlur={onWillBlurHandler}></NavigationEvents>;
+    return (
+        <View style={{ flex: 1 }}>
+            <NavigationEvents onDidFocus={onDidFocusHandler} onWillBlur={onWillBlurHandler}></NavigationEvents>
+            {renderContents ? props.contents : null}
+        </View>
+    );
 }
-
-export default withNavigation(NavigationEventReceiver);
