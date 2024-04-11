@@ -1,42 +1,55 @@
-import { createElement, useEffect } from "react";
-import { View } from "react-native";
-import { withNavigation } from "react-navigation";
+import { NavigationEvents, withNavigation } from "react-navigation";
+import { createElement, useCallback } from "react";
 
 function NavigationEventReceiver(props) {
+    const { pageIsVisibleAttr, onVisibleStateChangedAction } = props;
+
+    const onDidFocusHandler = useCallback(
+        payload => {
+            console.info("did focus: " + JSON.stringify(payload));
+            if (pageIsVisibleAttr && pageIsVisibleAttr.status === "available") {
+                if (pageIsVisibleAttr.readOnly) {
+                    console.warn("NativeHideContentsOnPageBlur: Page is visible attribute is readonly");
+                } else {
+                    pageIsVisibleAttr.setValue(true);
+                }
+            }
+            if (
+                onVisibleStateChangedAction &&
+                onVisibleStateChangedAction.canExecute &&
+                !onVisibleStateChangedAction.isExecuting
+            ) {
+                onVisibleStateChangedAction.execute();
+            }
+        },
+        [onVisibleStateChangedAction, pageIsVisibleAttr]
+    );
+
+    const onWillBlurHandler = useCallback(
+        payload => {
+            console.info("will blur: " + JSON.stringify(payload));
+            if (pageIsVisibleAttr && pageIsVisibleAttr.status === "available") {
+                if (pageIsVisibleAttr.readOnly) {
+                    console.warn("NativeHideContentsOnPageBlur: Page is visible attribute is readonly");
+                } else {
+                    pageIsVisibleAttr.setValue(false);
+                }
+            }
+            if (
+                onVisibleStateChangedAction &&
+                onVisibleStateChangedAction.canExecute &&
+                !onVisibleStateChangedAction.isExecuting
+            ) {
+                onVisibleStateChangedAction.execute();
+            }
+        },
+        [onVisibleStateChangedAction, pageIsVisibleAttr]
+    );
+
     console.info("NavigationEventReceiver.render");
     console.info(JSON.stringify(props.navigation));
 
-    useEffect(() => {
-        console.info("NavigationEventReceiver.focus subscribe");
-        const unsubscribeFocus = props.navigation.addListener("focus", () => {
-            console.info("NavigationEventReceiver.focus");
-            console.info(JSON.stringify(props.navigation.state));
-        });
-
-        return unsubscribeFocus;
-    }, [props.navigation]);
-
-    useEffect(() => {
-        console.info("NavigationEventReceiver.blur subscribe");
-        const unsubscribeBlur = props.navigation.addListener("blur", () => {
-            console.info("NavigationEventReceiver.blur");
-            console.info(JSON.stringify(props.navigation.state));
-        });
-
-        return unsubscribeBlur;
-    }, [props.navigation]);
-
-    useEffect(() => {
-        console.info("NavigationEventReceiver.state subscribe");
-        const unsubscribeState = props.navigation.addListener("state", () => {
-            console.info("NavigationEventReceiver.state");
-            console.info(JSON.stringify(props.navigation.state));
-        });
-
-        return unsubscribeState;
-    }, [props.navigation]);
-
-    return <View></View>;
+    return <NavigationEvents onDidFocus={onDidFocusHandler} onWillBlur={onWillBlurHandler}></NavigationEvents>;
 }
 
 export default withNavigation(NavigationEventReceiver);

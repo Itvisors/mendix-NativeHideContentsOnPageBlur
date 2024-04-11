@@ -8,9 +8,21 @@
     <icon/>
     <properties>
         <propertyGroup caption="General">
-            <property key="pageName" type="string">
-                <caption>Page name</caption>
-                <description>The name of the page the widget is placed on</description>
+            <property key="pageIsVisibleAttr" type="attribute">
+                <caption>Page is visible</caption>
+                <description>Receive value whether page is currently visible</description>
+                <attributeTypes>
+                    <attributeType name="Boolean" />
+                </attributeTypes>
+            </property>
+            <property key="onVisibleStateChangedAction" type="action" required="false">
+                <caption>On visible changed action</caption>
+                <description></description>
+            </property>
+            <property key="logToConsole" type="expression" required="false">
+                <caption>Console logging</caption>
+                <description>Logs messages about events received</description>
+                <returnType type="Boolean" />
             </property>
         </propertyGroup>
     </properties>
