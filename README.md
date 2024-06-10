@@ -1,24 +1,16 @@
 ## NativeHideContentsOnPageBlur
-[Native hide contents on page blur]
+Hide contents when the page is no longer shown, because another page is shown without closing the current page
 
 ## Features
-[feature highlights]
+- Automatically hide contents when the page is no longer visible
+- On blur action: when the page is no longer visible
+- On focus action: when the user returns to the page
+
+## Limitations
+- Only use nanoflows for the blur/focus actions
+- Some content will reset to their initial state if hidden using this widget, like a tab container that will show the default tab i.s.o. the selected tab, and a listview that will revert to top
 
 ## Usage
-[step by step instructions]
-
-## Demo project
-[link to sandbox]
-
-## Issues, suggestions and feature requests
-[link to GitHub issues]
-
-## Development and contribution
-
-1. Install NPM package dependencies by using: `npm install`. If you use NPM v7.x.x, which can be checked by executing `npm -v`, execute: `npm install --legacy-peer-deps`.
-1. Run `npm start` to watch for code changes. On every change:
-    - the widget will be bundled;
-    - the bundle will be included in a `dist` folder in the root directory of the project;
-    - the bundle will be included in the `deployment` and `widgets` folder of the Mendix test project.
-
-[specify contribution]
+- Place the widget on the page
+- Put content inside the widget that you want to be hidden when the page is no longer shown
+- Configure the blur or focus actions for custom logic

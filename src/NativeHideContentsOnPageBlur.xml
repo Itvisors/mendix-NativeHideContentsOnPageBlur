@@ -12,6 +12,14 @@
                 <caption>Contents</caption>
                 <description>Contents will be hidden when another page is opened.</description>
             </property>
+            <property key="onFocusAction" type="action" required="false">
+                <caption>On focus action</caption>
+                <description>Action to trigger when page is focused, shown again after closing another page</description>
+            </property>
+            <property key="onBlurAction" type="action" required="false">
+                <caption>On blur action</caption>
+                <description>Action to trigger when another page is opened without closing the current page</description>
+            </property>
             <property key="logToConsole" type="expression" required="false">
                 <caption>Console logging</caption>
                 <description>Logs messages about events received</description>

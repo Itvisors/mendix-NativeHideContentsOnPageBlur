@@ -5,24 +5,28 @@ import { View } from "react-native";
 export function NavigationEventReceiver(props) {
     const [renderContents, setRenderContents] = useState(true);
 
+    const { logToConsole, onFocus, onBlur } = props;
+
     const onWillFocusHandler = useCallback(
         payload => {
-            if (props.logToConsole) {
+            if (logToConsole) {
                 console.info("NativeHideContentsOnPageBlur will focus, back to page: " + payload.state.params.pageName);
             }
             setRenderContents(true);
+            onFocus();
         },
-        [props.logToConsole]
+        [logToConsole, onFocus]
     );
 
     const onWillBlurHandler = useCallback(
         payload => {
-            if (props.logToConsole) {
+            if (logToConsole) {
                 console.info("NativeHideContentsOnPageBlur will blur, open page: " + payload.state.params.pageName);
             }
             setRenderContents(false);
+            onBlur();
         },
-        [props.logToConsole]
+        [logToConsole, onBlur]
     );
 
     if (props.logToConsole) {
