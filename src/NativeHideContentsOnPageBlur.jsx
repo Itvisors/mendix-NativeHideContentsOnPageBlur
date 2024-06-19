@@ -15,6 +15,8 @@ export function NativeHideContentsOnPageBlur(props) {
         }
     }, [onBlurAction]);
 
+    console.info(JSON.stringify(props.logToConsole));
+
     return (
         <NavigationEventReceiver
             contents={props.contents}

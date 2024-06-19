@@ -1,7 +1,7 @@
 {
   "name": "nativehidecontentsonpageblur",
   "widgetName": "NativeHideContentsOnPageBlur",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Native hide contents on page blur",
   "copyright": "Aiden 2024",
   "author": "Marcel Groeneweg",
@@ -22,7 +22,8 @@
     "release": "pluggable-widgets-tools release:native"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^10.7.1"
+    "@mendix/pluggable-widgets-tools": "^10.7.2",
+    "@react-navigation/native": "6.1.6"
   },
   "dependencies": {
 
