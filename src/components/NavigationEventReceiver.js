@@ -7,37 +7,46 @@ export function NavigationEventReceiver(props) {
 
     const navigation = useNavigation();
 
-    const { logToConsole, onFocus, onBlur } = props;
+    const { logToConsole, onFocus, onBlur, widgetName } = props;
 
     useEffect(() => {
-        const unsubscribeFocus = navigation.addListener("focus", payload => {
-            console.info(JSON.stringify(payload));
-            // if (logToConsole) {
-            //     console.info("NativeHideContentsOnPageBlur will focus, back to page: " + payload.state.params.pageName);
-            // }
-            // setRenderContents(true);
-            // onFocus();
+        const unsubscribeFocus = navigation.addListener("focus", () => {
+            if (logToConsole) {
+                console.info(widgetName + " will focus");
+            }
+            setRenderContents(true);
+            onFocus();
         });
 
         return unsubscribeFocus;
-    }, [logToConsole, navigation, onFocus]);
+    }, [logToConsole, navigation, onFocus, widgetName]);
 
     useEffect(() => {
-        const unsubscribeBlur = navigation.addListener("blur", payload => {
-            console.info(JSON.stringify(payload));
-            //         if (logToConsole) {
-            //             console.info("NativeHideContentsOnPageBlur will blur, open page: " + payload.state.params.pageName);
-            //         }
-            //         setRenderContents(false);
-            //         onBlur();
+        const unsubscribeBlur = navigation.addListener("blur", () => {
+            if (logToConsole) {
+                console.info(widgetName + " will blur");
+            }
+            setRenderContents(false);
+            onBlur();
         });
 
         return unsubscribeBlur;
-    }, [logToConsole, navigation, onBlur]);
+    }, [logToConsole, navigation, onBlur, widgetName]);
 
-    if (props.logToConsole) {
-        console.info(props.widgetName + ": render contents: " + renderContents);
+    // If widget contents have been set, render these wrapped in a view with flex=1 to maximize it vertically against content without flex
+    if (props.contents) {
+        if (props.logToConsole) {
+            console.info(widgetName + ": render contents: " + renderContents);
+        }
+        if (renderContents) {
+            return <View style={{ flex: 1 }}>{props.contents}</View>;
+        } else {
+            return null;
+        }
+    } else {
+        if (props.logToConsole) {
+            console.info(widgetName + ": no contents, render contents flag: " + renderContents);
+        }
+        return null;
     }
-
-    return <View style={{ flex: 1 }}>{renderContents ? props.contents : null}</View>;
 }

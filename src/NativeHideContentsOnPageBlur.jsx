@@ -1,6 +1,5 @@
 import { createElement, useCallback } from "react";
 import { NavigationEventReceiver } from "./components/NavigationEventReceiver";
-// import { withNavigation } from "react-navigation";
 
 export function NativeHideContentsOnPageBlur(props) {
     const { onFocusAction, onBlurAction } = props;
@@ -15,7 +14,7 @@ export function NativeHideContentsOnPageBlur(props) {
         }
     }, [onBlurAction]);
 
-    console.info(JSON.stringify(props.logToConsole));
+    // console.info(JSON.stringify(props.logToConsole));
 
     return (
         <NavigationEventReceiver

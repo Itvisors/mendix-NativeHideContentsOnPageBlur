@@ -22,11 +22,10 @@
     "release": "pluggable-widgets-tools release:native"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^10.7.2",
-    "@react-navigation/native": "6.1.6"
+    "@mendix/pluggable-widgets-tools": "10.12.1"
   },
   "dependencies": {
-
+    "@react-navigation/native": "6.1.6"
   },
   "resolutions": {
     "react": "18.2.0",

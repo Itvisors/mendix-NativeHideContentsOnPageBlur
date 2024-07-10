@@ -8,7 +8,7 @@
     <studioProCategory>Display</studioProCategory>
     <properties>
         <propertyGroup caption="General">
-            <property key="contents" type="widgets">
+            <property key="contents" type="widgets" required="false">
                 <caption>Contents</caption>
                 <description>Contents will be hidden when another page is opened.</description>
             </property>
