@@ -1,26 +1,31 @@
-$background-color: #fff !default;
-$icon-color: #606671 !default;
-$icon-size: 14px !default;
-$pagination-button-color: #3b4251 !default;
-$pagination-caption-color: #0a1325 !default;
-$dragging-color-effect: rgba(10, 19, 37, 0.8) !default;
-$dragging-effect-size: 4px;
+@import "export-alert";
+@import "export-progress";
+@import "pseudo-modal";
 
-$grid-bg-striped: #fafafb !default;
-$grid-bg-hover: #f5f6f6 !default;
-$spacing-small: 8px !default;
-$spacing-medium: 16px !default;
-$spacing-large: 24px !default;
-$grid-border-color: #ced0d3 !default;
+$dg-background-color: #fff;
+$dg-icon-color: #606671;
+$dg-icon-size: 14px;
+$dg-pagination-button-color: #3b4251;
+$dg-pagination-caption-color: #0a1325;
+$dragging-color-effect: rgba(10, 19, 37, 0.8);
+$dg-dragging-effect-size: 4px;
 
-$brand-primary: #264ae5 !default;
-$brand-light: #e6eaff !default;
-$grid-selected-row-background: $brand-light;
+$dg-grid-bg-striped: #fafafb;
+$dg-grid-bg-hover: #f5f6f6;
+$dg-spacing-small: 8px;
+$dg-spacing-medium: 16px;
+$dg-spacing-large: 24px;
+$dg-grid-border-color: #ced0d3;
+
+$dg-brand-primary: #264ae5;
+$dg-brand-light: #e6eaff;
+$dg-grid-selected-row-background: $dg-brand-light;
+$dg-skeleton-background: linear-gradient(90deg, rgba(194, 194, 194, 0.2) 0%, #d2d2d2 100%);
 
 .table {
     position: relative;
     border-width: 0;
-    background-color: $background-color;
+    background-color: var(--bg-color-secondary, $dg-background-color);
 
     /* Table Content */
     .table-content {
@@ -38,10 +43,10 @@ $grid-selected-row-background: $brand-light;
         display: flex;
         align-items: flex-start;
         font-weight: 600;
-        background-color: $background-color;
+        background-color: var(--bg-color-secondary, $dg-background-color);
         border-width: 0;
-        border-color: $grid-border-color;
-        padding: $spacing-medium;
+        border-color: var(--grid-border-color, $dg-grid-border-color);
+        padding: var(--spacing-medium, $dg-spacing-medium);
         top: 0;
         min-width: 0;
         position: relative;
@@ -59,7 +64,7 @@ $grid-selected-row-background: $brand-light;
             position: absolute;
             top: 0;
             height: 100%;
-            width: $dragging-effect-size;
+            width: var(--spacing-smaller, $dg-dragging-effect-size);
             background-color: $dragging-color-effect;
 
             z-index: 1;
@@ -95,10 +100,10 @@ $grid-selected-row-background: $brand-light;
             cursor: col-resize;
 
             &:hover .column-resizer-bar {
-                background-color: $brand-primary;
+                background-color: var(--brand-primary, $dg-brand-primary);
             }
             &:active .column-resizer-bar {
-                background-color: $brand-primary;
+                background-color: var(--brand-primary, $dg-brand-primary);
             }
 
             .column-resizer-bar {
@@ -124,8 +129,7 @@ $grid-selected-row-background: $brand-light;
 
         /* Header text */
         .column-header {
-            margin: 1px 1px 1px -$dragging-effect-size + 1px;
-
+            margin: 1px 1px calc((-1 * var(--spacing-smaller, $dg-dragging-effect-size)) + 2px);
             display: flex;
             align-items: baseline;
 
@@ -140,9 +144,9 @@ $grid-selected-row-background: $brand-light;
 
             svg {
                 margin-left: 8px;
-                flex: 0 0 $icon-size;
-                color: $icon-color;
-                height: $icon-size;
+                flex: 0 0 var(--btn-font-size, $dg-icon-size);
+                color: var(--gray-dark, $dg-icon-color);
+                height: var(--btn-font-size, $dg-icon-size);
                 align-self: center;
             }
 
@@ -151,7 +155,7 @@ $grid-selected-row-background: $brand-light;
             }
 
             &:focus-visible {
-                outline: 1px solid $brand-primary;
+                outline: 1px solid var(--brand-primary, $dg-brand-primary);
             }
         }
 
@@ -178,7 +182,7 @@ $grid-selected-row-background: $brand-light;
     &:has(.th .column-container .filter:not(:empty)) {
         .th {
             &.column-selector {
-                padding: $spacing-medium 0;
+                padding: var(--spacing-medium, $dg-spacing-medium) 0;
             }
             /*adjust filter-selector icon to be mid-bottom aligned */
             .column-selector-content {
@@ -189,7 +193,7 @@ $grid-selected-row-background: $brand-light;
             /*adjust checkbox toggle to be mid-bottom aligned */
             &.widget-datagrid-col-select {
                 align-items: flex-end;
-                padding-bottom: calc($spacing-medium + 11px);
+                padding-bottom: calc(var(--spacing-medium, $dg-spacing-medium) + 11px);
             }
         }
     }
@@ -201,7 +205,7 @@ $grid-selected-row-background: $brand-light;
         /* Column content */
         .column-selector-content {
             align-self: center;
-            padding-right: $spacing-medium;
+            padding-right: var(--spacing-medium, $dg-spacing-medium);
             /* Button containing the eye icon */
             .column-selector-button {
                 $icon-margin: 7px;
@@ -211,8 +215,8 @@ $grid-selected-row-background: $brand-light;
                 padding: 0;
                 margin: 0;
 
-                height: ($icon-size + $icon-margin * 2 + $icon-slack-size);
-                width: ($icon-size + $icon-margin * 2 + $icon-slack-size);
+                height: calc(var(--btn-font-size, $dg-icon-size) + $icon-margin * 2 + $icon-slack-size);
+                width: calc(var(--btn-font-size, $dg-icon-size) + $icon-margin * 2 + $icon-slack-size);
 
                 svg {
                     margin: $icon-margin;
@@ -225,7 +229,7 @@ $grid-selected-row-background: $brand-light;
                 right: 0;
                 margin: 8px;
                 padding: 0 16px;
-                background: $background-color;
+                background: var(--bg-color-secondary, $dg-background-color);
                 z-index: 102;
                 border-radius: 3px;
                 border: 1px solid transparent;
@@ -253,10 +257,10 @@ $grid-selected-row-background: $brand-light;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: $spacing-medium;
+        padding: var(--spacing-medium, $dg-spacing-medium);
         border-style: solid;
         border-width: 0;
-        border-color: $grid-border-color;
+        border-color: var(--grid-border-color, $dg-grid-border-color);
         border-bottom-width: 1px;
         min-width: 0;
 
@@ -269,7 +273,7 @@ $grid-selected-row-background: $brand-light;
             outline-width: 1px;
             outline-style: solid;
             outline-offset: -1px;
-            outline-color: $brand-primary;
+            outline-color: var(--brand-primary, $dg-brand-primary);
         }
 
         &.clickable {
@@ -325,7 +329,7 @@ $grid-selected-row-background: $brand-light;
     white-space: nowrap;
     align-items: baseline;
     margin: 16px;
-    color: $pagination-caption-color;
+    color: $dg-pagination-caption-color;
 
     .paging-status {
         padding: 0 8px 8px;
@@ -333,12 +337,12 @@ $grid-selected-row-background: $brand-light;
 
     .pagination-button {
         padding: 6px;
-        color: $pagination-button-color;
+        color: var(--gray-darker, $dg-pagination-button-color);
         border-color: transparent;
         background-color: transparent;
 
         &:hover {
-            color: $brand-primary;
+            color: var(--brand-primary, $dg-brand-primary);
             border-color: transparent;
             background-color: transparent;
         }
@@ -353,7 +357,7 @@ $grid-selected-row-background: $brand-light;
         }
 
         &:focus-visible {
-            outline: 1px solid $brand-primary;
+            outline: 1px solid var(--brand-primary, $dg-brand-primary);
         }
     }
     .pagination-icon {
@@ -372,7 +376,7 @@ $grid-selected-row-background: $brand-light;
     right: 0;
     margin: 8px 0;
     padding: 0 16px;
-    background: $background-color;
+    background: var(--bg-color-secondary, $dg-background-color);
     z-index: 102;
     border-radius: 3px;
     border: 1px solid transparent;
@@ -400,17 +404,126 @@ $grid-selected-row-background: $brand-light;
 }
 
 .widget-datagrid {
+    position: relative;
+
     &.widget-datagrid-selection-method-click {
         .tr.tr-selected .td {
-            background-color: $grid-selected-row-background;
+            background-color: $dg-grid-selected-row-background;
+        }
+    }
+
+    .th.widget-datagrid-col-select,
+    .td.widget-datagrid-col-select {
+        align-items: center;
+    }
+
+    &-exporting {
+        .widget-datagrid-top-bar,
+        .widget-datagrid-header,
+        .widget-datagrid-content,
+        .widget-datagrid-footer {
+            visibility: hidden;
+
+            * {
+                transition: unset;
+            }
+        }
+    }
+
+    &-col-select input:focus-visible {
+        outline-offset: 0;
+    }
+
+    &-content {
+        overflow-y: auto;
+    }
+
+    &-loader-container {
+        align-items: center;
+        background-color: rgba(255, 255, 255, 1);
+        display: flex;
+        height: 400px;
+        justify-content: center;
+    }
+
+    &-skeleton,
+    &-spinner {
+        align-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow: hidden;
+    }
+
+    &-skeleton {
+        padding: 6px var(--dropdown-outer-padding, 10px);
+
+        &-loader {
+            animation: skeleton-loading 1s linear infinite alternate;
+            background: var(--dg-skeleton-background, $dg-skeleton-background);
+            background-size: 300% 100%;
+            border-radius: 4px;
+            height: 16px;
+            width: 148px;
+
+            &-small {
+                margin-right: 8px;
+                width: 16px;
+            }
+        }
+    }
+
+    &-spinner {
+        justify-content: center;
+        width: 100%;
+
+        &-margin {
+            margin: 52px 0;
+        }
+
+        &-loader {
+            --widget-combobox-spinner-loader: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+            animation: rotate 1s infinite linear;
+            aspect-ratio: 1;
+            background: var(--brand-primary, $dg-brand-primary);
+            border-radius: 50%;
+            mask: var(--widget-combobox-spinner-loader);
+            mask-composite: subtract;
+
+            &-large {
+                height: 48px;
+                padding: 7px;
+                width: 48px;
+            }
+            &-medium {
+                height: 24px;
+                padding: 3.5px;
+                width: 24px;
+            }
+
+            &-small {
+                height: 16px;
+                padding: 2.3px;
+                width: 16px;
+            }
         }
     }
 }
 
-.widget-datagrid-col-select input:focus-visible {
-    outline-offset: 0;
+.widget-datagrid .widget-datagrid-load-more {
+    display: block !important;
+    margin: 0 auto;
 }
 
-.widget-datagrid-content {
-    overflow-y: auto;
+@keyframes skeleton-loading {
+    0% {
+        background-position: right;
+    }
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(1turn);
+    }
 }
