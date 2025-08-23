@@ -6,29 +6,27 @@ package nativemobileresources.proxies;
 
 public enum PictureQuality
 {
-	original(new java.lang.String[][] { new java.lang.String[] { "en_US", "Original" } }),
-	low(new java.lang.String[][] { new java.lang.String[] { "en_US", "Low" } }),
-	medium(new java.lang.String[][] { new java.lang.String[] { "en_US", "Medium" } }),
-	high(new java.lang.String[][] { new java.lang.String[] { "en_US", "High" } }),
-	custom(new java.lang.String[][] { new java.lang.String[] { "en_US", "Custom" } });
+	original("a3910108-1fc6-4f6b-aa9b-966d764c5c4a"),
+	low("2e4dfad8-c364-4431-a2c0-3d4beafd7333"),
+	medium("352e3cac-5a19-42ee-abc3-433ceafcfa59"),
+	high("7e37ecf3-865b-4ed0-9a8b-95ea59af7a92"),
+	custom("5c9ba3a3-aa01-427c-9295-4d0fcc771b60");
 
-	private final java.util.Map<java.lang.String, java.lang.String> captions;
-
-	private PictureQuality(java.lang.String[][] captionStrings)
+	private final java.lang.String i18nCaptionKey;
+	
+	private PictureQuality(java.lang.String i18nCaptionKey)
 	{
-		this.captions = new java.util.HashMap<>();
-		for (java.lang.String[] captionString : captionStrings) {
-			captions.put(captionString[0], captionString[1]);
-		}
+		this.i18nCaptionKey = i18nCaptionKey;
 	}
 
 	public java.lang.String getCaption(java.lang.String languageCode)
 	{
-		return captions.getOrDefault(languageCode, "en_US");
+		String caption = com.mendix.core.Core.getInternationalizedString(languageCode, i18nCaptionKey);
+		return caption.isEmpty() ? getCaption() : caption;
 	}
 
 	public java.lang.String getCaption()
 	{
-		return captions.get("en_US");
+		return com.mendix.core.Core.getInternationalizedString("en_US", i18nCaptionKey);
 	}
 }

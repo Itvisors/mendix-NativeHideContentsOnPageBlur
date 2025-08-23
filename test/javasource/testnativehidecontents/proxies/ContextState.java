@@ -6,26 +6,24 @@ package testnativehidecontents.proxies;
 
 public enum ContextState
 {
-	Created(new java.lang.String[][] { new java.lang.String[] { "en_US", "Created" } }),
-	Initialized(new java.lang.String[][] { new java.lang.String[] { "en_US", "Initialized" } });
+	Created("da45783a-e611-4862-8970-b1a1b4dd8eba"),
+	Initialized("74b570f1-723b-4cea-a7df-53cb35a41c0d");
 
-	private final java.util.Map<java.lang.String, java.lang.String> captions;
-
-	private ContextState(java.lang.String[][] captionStrings)
+	private final java.lang.String i18nCaptionKey;
+	
+	private ContextState(java.lang.String i18nCaptionKey)
 	{
-		this.captions = new java.util.HashMap<>();
-		for (java.lang.String[] captionString : captionStrings) {
-			captions.put(captionString[0], captionString[1]);
-		}
+		this.i18nCaptionKey = i18nCaptionKey;
 	}
 
 	public java.lang.String getCaption(java.lang.String languageCode)
 	{
-		return captions.getOrDefault(languageCode, "en_US");
+		String caption = com.mendix.core.Core.getInternationalizedString(languageCode, i18nCaptionKey);
+		return caption.isEmpty() ? getCaption() : caption;
 	}
 
 	public java.lang.String getCaption()
 	{
-		return captions.get("en_US");
+		return com.mendix.core.Core.getInternationalizedString("en_US", i18nCaptionKey);
 	}
 }
