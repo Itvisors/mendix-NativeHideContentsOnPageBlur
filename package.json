@@ -1,7 +1,7 @@
 {
   "name": "nativehidecontentsonpageblur",
   "widgetName": "NativeHideContentsOnPageBlur",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Native hide contents on page blur",
   "copyright": "Aiden 2024",
   "author": "Marcel Groeneweg",
@@ -22,17 +22,21 @@
     "release": "pluggable-widgets-tools release:native"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "11.3.0"
+    "@mendix/pluggable-widgets-tools": "11.12.0"
   },
   "dependencies": {
-    "@react-navigation/native": "7.0.14"
+    "@react-navigation/native": "7.2.4"
   },
   "resolutions": {
-    "react": "18.2.0",
-    "react-native": "0.72.7"
+    "react": "19.0.0",
+    "react-native": "0.78.2",
+    "@types/react": "19.0.0",
+    "@types/react-native": "0.78.2"
   },
   "overrides": {
-    "react": "18.2.0",
-    "react-native": "0.72.7"
+    "react": "19.0.0",
+    "react-native": "0.78.2",
+    "@types/react": "19.0.0",
+    "@types/react-native": "0.78.2"
   }
 }

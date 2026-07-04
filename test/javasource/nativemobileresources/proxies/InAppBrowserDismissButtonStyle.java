@@ -6,9 +6,9 @@ package nativemobileresources.proxies;
 
 public enum InAppBrowserDismissButtonStyle
 {
-	done("10273cc4-d5d1-461a-8dbb-f617488de194"),
-	close("ffa79cc5-0791-4b17-a52d-ef7d17b61ee6"),
-	cancel("e0963d31-d355-48dd-9f74-6613fb53c155");
+	done("310b1813-7933-4149-92ee-aee7a0d72729"),
+	close("4231296b-a2c5-446e-85b0-bbcd865024a9"),
+	cancel("f51d80ee-1788-4e9c-8723-da7f69ac02bf");
 
 	private final java.lang.String i18nCaptionKey;
 	
